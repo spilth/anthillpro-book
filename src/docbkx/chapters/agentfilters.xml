@@ -1,0 +1,40 @@
+<chapter>
+	<title>Agent Filters</title>
+	<section>
+		<title>Overview</title>
+		<para>Agent Filters are a mechanism in AntHill Pro that let you control the Agents that Jobs in a Workflow run on. This is important when an Environment contains several Agents but you want to target a subset of them based on some logic. Some examples of  situations where Agent Filters can help are:</para>
+		<itemizedlist>
+			<listitem><para>Your project generates artifacts which need to be deployed to specific machines in your Environments - an application that goes to your app severs, static content that belongs on static servers and database statements that need to be executed on your database machines.</para></listitem>
+			<listitem><para>You need two Jobs to run on the same exact Agent</para></listitem>
+			<listitem><para>Deployers need the flexibility to deploy to specific machines for testing purposes.</para></listitem>
+		</itemizedlist>
+		<para>This document aims to give you an overview of how Agent Filters work and how to write your own.</para>
+	</section>
+	<section>
+		<title>Creating Agent Filters</title>
+		<para>To create Agent Filters you'll need access to the System tab.
+  See the official AHP documentation for information on managing
+  permissions.</para>
+		<para>To create a new Agent Filter:</para>
+		<orderedlist>
+			<listitem><para>Click on the "System" tab</para></listitem>
+			<listitem><para>In the "Script Library" group click “Agent Filter”</para></listitem>
+			<listitem><para>Click "Create New"</para></listitem>
+			<listitem><para>Enter a "Name"</para></listitem>
+			<listitem><para>Enter a "Description"</para></listitem>
+			<listitem><para>Choose a "Script Group"</para></listitem>
+			<listitem><para>Choose a "Language"</para></listitem>
+			<listitem><para>Enter your Script</para></listitem>
+			<listitem><para>Click “Save”</para></listitem>
+		</orderedlist>
+	</section>
+	<section>
+		<title>Agent Filter Criteria Objects</title>
+		<para>An Agent Filter Script needs to return an object that extends the class Criteria in the package com.urbancode.anthill3.domain.script.agentfilter.criteria. AntHill Pro will then call the “filter” method of your object, pass in an array of Agents in the environment the Workflow is being run on and expects back an array of Agents. If the Workflow has the Job set up as an Iteration it will run on all the machines you return.</para>
+		<para>AntHill Pro provides two extensions of the Criteria class: one that inspects the properties set on Agents and another that let’s you combine multiple Criteria:</para>
+		<itemizedlist>
+			<listitem><para>com.urbancode.anthill3.domain.script.agentfilter.criteria.Variable</para></listitem>
+			<listitem><para>com.urbancode.anthill3.domain.script.agentfilter.criteria.Where</para></listitem>
+		</itemizedlist>
+	</section>
+</chapter>

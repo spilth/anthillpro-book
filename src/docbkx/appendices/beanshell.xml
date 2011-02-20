@@ -1,0 +1,7 @@
+<appendix>
+    <title>BeanShell</title>
+	<section>
+		<title>Overview</title>
+    	<para>The BeanShell scripting language can be used in number of places for scripting Anthill Pro behavior. Details on BeanShell can be found at http://www.beanshell.org/.</para>
+	</section>
+</appendix>

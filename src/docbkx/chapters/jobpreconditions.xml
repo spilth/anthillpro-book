@@ -1,0 +1,124 @@
+<chapter>
+	<title>Job Pre-Conditions</title>
+	<section>
+		<title>Overview</title>
+		<para>Job Pre-Conditions Scripts let you control which Jobs within a
+  Workflow run and which are skipped. There are a number of situations
+  where this kind of control comes in handy:</para>
+		<itemizedlist>
+			<listitem>
+				<para>You have a large number of projects that use the same Build
+      Workflow but some of these projects have documentation that needs to
+      deployed while others don’t. Rather than maintain two separate Build
+      Workflows with only one difference you can use a Job Pre-Condition
+      Script that only runs a Documentation Deploy Job for projects that
+      supply a documentation artifact.</para>
+			</listitem>
+			<listitem>
+				<para>You need to automatically clear out the database only when
+      deploying to the QA environment, but not to any other
+      environment.</para>
+			</listitem>
+			<listitem>
+				<para>Deployers want to be able to choose, at Deploy time, which artifacts get
+					deployed.</para>
+			</listitem>
+			<listitem>
+				<para>Sesegsegse</para>
+			</listitem>
+		</itemizedlist>
+		<para>This document aims to give you an overview of how Job
+  Pre-Conditions work and how to write your own.</para>
+	</section>
+	<section>
+		<title>Creating Job Pre-Condition Scripts</title>
+		<para>To create Job Pre-Conditions you'll need access to the System tab.
+  See the official AHP documentation for information on managing
+  permissions.</para>
+		<para>To create a new Job Pre-Condition:</para>
+		<orderedlist>
+			<listitem>
+				<para>Log into AHP</para>
+			</listitem>
+			<listitem>
+				<para>Click on the "System" tab</para>
+			</listitem>
+			<listitem>
+				<para>In the "Script Library" section click “Job
+      Pre-Condition”</para>
+			</listitem>
+			<listitem>
+				<para>Click "Create New"</para>
+			</listitem>
+			<listitem>
+				<para>Enter a "Name"</para>
+			</listitem>
+			<listitem>
+				<para>Enter a "Description"</para>
+			</listitem>
+			<listitem>
+				<para>Choose a "Script Group"</para>
+			</listitem>
+			<listitem>
+				<para>Choose a "Language" (Beanshell for the provided
+      examples)</para>
+			</listitem>
+			<listitem>
+				<para>Enter the "Script"</para>
+			</listitem>
+			<listitem>
+				<para>Click Save</para>
+			</listitem>
+		</orderedlist>
+	</section>
+	<section>
+		<title>Job Pre-Condition Criteria Objects</title>
+		<para>As the description above the "Script" text area states, the script
+  needs to return a Criteria object. AntHill Pro will take the Criteria
+  object you return and call its “matches” method. If the method returns
+  true the Job will be run. If it returns false, the Job will be
+  skipped.</para>
+		<section>
+			<title>Which Criteria Class?</title>
+			<para>A quick look at the AntHill Pro Remoting API might lead you to
+    believe you're working with the Criteria class listed there, but that
+    class lives in
+    com.urbancode.anthill3.domain.script.agentfilter.criteria.</para>
+			<para>For Job Pre-Conditions you want the Criteria class in the package in
+      com.urbancode.logic. This class is not listed in the Remoting or Scripting APIs. However
+      two of its subclasses are:<itemizedlist><listitem><para>com.urbancode.anthill3.domain.script.job.JobStatus</para></listitem><listitem><para>com.urbancode.anthill3.domain.script.job.Property</para></listitem></itemizedlist></para>
+		</section>
+		<section>
+			<title>JobStatus Class</title>
+			<para>JobStatus provides a number of static methods that
+        look at the status of other jobs in the current workflow. You can look at the status of:</para>
+			<itemizedlist>
+				<listitem>
+					<para>All the Jobs in the workflow</para>
+				</listitem>
+				<listitem>
+					<para>Ancestor Jobs - Jobs that occurred before the current one, if any</para>
+				</listitem>
+				<listitem>
+					<para>Parent Job - The Job immediately before the current one, if any</para>
+				</listitem>
+				<listitem>
+					<para>Iterated Jobs - Completed Jobs in the same iteration as the current Job, if
+            any</para>
+				</listitem>
+				<listitem>
+					<para>Completed Jobs - All jobs that have run in the workflow, regardless of their
+            “ancestry”</para>
+				</listitem>
+			</itemizedlist>
+			<para>Additionally, you can base your decision if a job has one particular status or if its
+      status is in an array of acceptable statuses.</para>
+		</section>
+		<section>
+			<title>JobStatusEnum</title>
+			<para>Before we continue, we need to talk about the status
+        of Jobs. After Jobs are executed (or skipped because of a Job Pre-condition) they are
+        give one of the following statuses from the JobStatusEnum enumeration:</para>
+		</section>
+	</section>
+</chapter>

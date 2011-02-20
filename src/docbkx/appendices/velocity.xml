@@ -1,0 +1,8 @@
+<appendix>
+    <title>Velocity</title>
+
+	<section>
+		<title>Overview</title>
+		<para>Anthill Pro Velocity reports uses the Apache Velocity templating engine. Details on Velocity can be fount at http://velocity.apache.org/</para>
+	</section>
+</appendix>
