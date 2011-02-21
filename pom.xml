@@ -20,6 +20,9 @@
             <phase>generate-sources</phase>
           </execution>
         </executions>
+		<configuration>
+			<tocMaxDepth>2</tocMaxDepth>
+		</configuration>
         <dependencies>
           <dependency>
             <groupId>org.docbook</groupId>
