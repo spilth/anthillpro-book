@@ -1,4 +1,6 @@
 digraph ahp {
+	node=[shape="box"]
+
 	lcm [label="Life-Cycle model"]
 	p [label="Project"]
 	wf [label="Workflow"]
