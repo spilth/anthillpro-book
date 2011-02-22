@@ -1,0 +1,29 @@
+digraph ahp {
+	lcm [label="Life-Cycle model"]
+	p [label="Project"]
+	wf [label="Workflow"]
+	wfd [label="Workflow Definition"]
+	jd [label="Job Definition"]
+	jpc [label="Job Pre-Condition"]
+	spc [label ="Step Pre-Condition"]
+	af [label="Agent Filter"]
+	a [label="Agent"]
+	e [label="Environment"]
+	eg [label="Environment Group"]
+
+	lcm -> p
+	p -> wf
+	eg -> p
+	eg -> e
+	e -> a
+	af -> a
+	wf -> wfd
+	wfd -> af
+	wfd -> jpc
+	wfd -> jd
+	jd -> spc
+	wf -> e
+	wfd -> lcm
+	jd -> lcm
+}
+

@@ -35,6 +35,16 @@
       <plugin>
 	    <groupId>us.bryon</groupId>
 	    <artifactId>graphviz-maven-plugin</artifactId>
+		<executions>
+			<execution>
+				<goals>
+					<goal>dot</goal>
+				</goals>
+			</execution>
+		</executions>
+		<configuration>
+			<basedir>src/dot</basedir>
+		</configuration>
 	  </plugin>
     </plugins>
   </build>
