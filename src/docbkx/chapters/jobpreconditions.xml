@@ -274,7 +274,146 @@
 			<section>
 				<title>Property Static Methods</title>
 				<para>Property provides a number of static methods that can tell you if a property exists, if it has a certain value, if it’s value is in a list of values or if the value matches a regular expression. Note: propName is always a String, value is a String and values is an Array of Strings.</para>
+				<table>
+					<title>Property Class Static Methods</title>
+					<tgroup cols="2">
+						<colspec colnum="1" colname="c1" colwidth="1.0*"/>
+						<colspec colnum="2" colname="c2" colwidth="3.0*"/>
+						<thead>
+							<row>
+								<entry>Method</entry>
+								<entry>Create a Criteria that only returns true if...</entry>
+							</row>
+						</thead>
+						<tbody>
+							<row>
+								<entry>exists(propName)</entry>
+								<entry>the named property is defined.</entry>
+							</row>
+							<row>
+								<entry>notExists(propName)</entry>
+								<entry>the named property is not defined.</entry>
+							</row>
+							<row>
+								<entry>in(propName, values)</entry>
+								<entry>the named property is defined and has the exact value as one of the given values.</entry>
+							</row>
+							<row>
+								<entry>notIn(propName, values)</entry>
+								<entry>the named property is not defined or the property is defined and its value is not the exact value of one of the given values.</entry>
+							</row>
+							<row>
+								<entry>is(propName, value)</entry>
+								<entry>the named property is defined and has the exact given value.</entry>
+							</row>
+							<row>
+								<entry>not(propName, value)</entry>
+								<entry>the named property is not defined or the property is defined and its value is not the exact given value.</entry>
+							</row>
+							<row>
+								<entry>like(propName, value)</entry>
+								<entry>the named property is defined and the property value matches the regular expression given.</entry>
+							</row>
+							<row>
+								<entry>like(propName, values)</entry>
+								<entry>the named property is defined and the property value matches on of the regular expressions given.</entry>
+							</row>
+							<row>
+								<entry>notLike(propName, value)</entry>
+								<entry>the named property is not defined or the property is defined and its value does not match the regular expression given.</entry>
+							</row>
+							<row>
+								<entry>notLike(propName, values)</entry>
+								<entry>the named property is not defined or the property is defined and its value does not match the regular expressions given.</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</table>
 			</section>
 		</section>
+		<section>
+			<title>Logic</title>
+			<para>Often you will need to combine the results of JobStatus and Property calls. The Logic class provides a few static methods to help you do this. Unfortunately this is another class that does appear in the public APIs - it comes from a dependency of AntHill Pro, not AHP itself.</para>
+			<section>
+				<title>Logic Static Methods</title>
+				<para>Here are the static methods it provides:</para>
+				
+				<table>
+					<title>Property Class Static Methods</title>
+					<tgroup cols="2">
+						<colspec colnum="1" colname="c1" colwidth="1.0*"/>
+						<colspec colnum="2" colname="c2" colwidth="1.0*"/>
+						<thead>
+							<row>
+								<entry>Method</entry>
+								<entry>Create a Criteria that only returns true if...</entry>
+							</row>
+						</thead>
+						<tbody>
+							<row>
+								<entry>Logic.or(Criteria a, Criteria b)</entry>
+								<entry>either a or b matches.</entry>
+							</row>
+							<row>
+								<entry>Logic.or(Criteria[] a)</entry>
+								<entry>any of the criteria matches.</entry>
+							</row>
+							<row>
+								<entry>Logic.and(Criteria a, Criteria b)</entry>
+								<entry>both a and b match.</entry>
+							</row>
+							<row>
+								<entry>Logic.and(Criteria[] a)</entry>
+								<entry>all of the criteria match.</entry>
+							</row>
+							<row>
+								<entry>Logic.not(Criteria a)</entry>
+								<entry>a does not match.</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</table>
+				<para>This is very useful for Jobs beyond the first one in the workflow where we care about the jobs that ran before the current one. For example, we may want to run a particular Job if a property is set to true AND if all previous Jobs were successful as well.  For that we can use Logic.and to check the Criteria objects returned by both JobStatus and Property methods.</para>				
+					<programlisting><![CDATA[Logic.and(
+ JobStatus.allAncestorsIn(new JobStatusEnum[] {
+   JobStatusEnum.SUCCESS, JobStatusEnum.NOT_NEEDED
+ }),
+ Property.is("deploy-admin", "true")
+);]]></programlisting>
+			</section>
+		</section>
+	</section>
+	<section>
+		<title>Custom Criteria Classes</title>
+		<para>AntHill Pro comes with a number of Job Pre-Condition Scripts already set up that cover most of the common scenarios regarding Job Stauses.  If you need to support logic outside of what JobStatus and Property provide then you need to make your own Criteria class. You can do this by creating one on the fly and returning it in your script. You need only implement a method named matches(Object) which needs to return a boolean.</para>
+		<programlisting><![CDATA[return new Criteria() {
+  public boolean matches(Object obj) {
+    return true; // or false...
+  }
+}]]></programlisting>
+
+
+		<para>Return "true" if you want the Job in question to run. The Job will run and return one of the JobStatusEnum values other than NOT_NEEDED, depending on its success. Return "false" if you want it to be skipped. It will be given the status JobStatusEnum.NOT_NEEDED.</para>
+	</section>
+	<section>
+		<title>Combining Stock and Custom Criteria Classes</title>
+		<para>Just as you might want to combine a JobStatus and Property Criteria class, you might want to combine them with your own Custom Criteria, or multiple Custom Criterias. This is another place you can make use of the Logic static methods.</para>
+<programlisting><![CDATA[Logic.and(
+  new Criteria() {
+    public boolean matches(Object obj) {
+      return true; // Or false!
+      );
+    }
+  },
+  StepStatus.allPriorIn(new JobStatusEnum[] {
+    JobStatusEnum.SUCCESS,
+    JobStatusEnum.SUCCESS_WARN
+  })
+)]]></programlisting>
+	</section>
+	<section>
+		<title>Context Is King</title>
+		<para>So it’s great that you can use the stock Criteria classes, create you own custom ones, and even combine them in various ways, but often you will need to base your decision on information beyond only the status of other jobs and the value of properties.</para>
+		<para>Several "Lookup" classes provide a getCurrent() method that returns an object in the context of the currently running Workflow that can help you create your own logic. Here are a few that might be useful:</para>
 	</section>
 </chapter>
