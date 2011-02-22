@@ -32,6 +32,10 @@
           </dependency>
         </dependencies>
       </plugin>
+      <plugin>
+	    <groupId>us.bryon</groupId>
+	    <artifactId>graphviz-maven-plugin</artifactId>
+	  </plugin>
     </plugins>
   </build>
 
