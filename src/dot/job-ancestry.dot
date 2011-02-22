@@ -1,0 +1,24 @@
+digraph jobAncestry {
+	node=[shape="invhouse"]
+	
+	jobA [label="A"]
+
+	subgraph cluster0{
+		jobB1 [label="B1"]
+		jobC1 [label="C1"]
+	}
+	
+	subgraph cluster1 {
+		jobB2 [label="B2"]
+		jobC2 [label="C2"]
+	}
+	
+	jobD [label="D"]
+	
+	jobA -> jobB1
+	jobA -> jobB2
+	jobB1 -> jobC1
+	jobB2 -> jobC2
+	jobC1 -> jobD
+	jobC2 -> jobD
+}

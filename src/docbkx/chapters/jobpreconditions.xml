@@ -297,8 +297,12 @@
 				<title>Job Ancestry</title>
 				<para>If you’re unclear as to the different types of Job scope, the diagram and
 					chart below should help you understand:</para>
-				<graphic fileref="/Users/brian/Dropbox/Projects/Maven/ahpbook/target/graphviz/ahp.png" scalefit="true" scale="true"
-					align="center"/>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="../../target/graphviz/job-ancestry.png"
+							wordsize=""/>
+					</imageobject>
+				</mediaobject>
 			</section>
 		</section>
 		<section>
@@ -434,12 +438,12 @@
 					run a particular Job if a property is set to true AND if all previous Jobs were
 					successful as well. For that we can use Logic.and to check the Criteria objects
 					returned by both JobStatus and Property methods.</para>
-				<programlisting><![CDATA[Logic.and(
+				<screen>Logic.and(
  JobStatus.allAncestorsIn(new JobStatusEnum[] {
    JobStatusEnum.SUCCESS, JobStatusEnum.NOT_NEEDED
  }),
  Property.is("deploy-admin", "true")
-);]]></programlisting>
+);</screen>
 			</section>
 		</section>
 	</section>
@@ -537,5 +541,7 @@
 				</tbody>
 			</tgroup>
 		</table>
+		<para>The Scripting API lists a number of other methods for these Lookup classes so it’s
+			worth looking through the documentation for others.</para>
 	</section>
 </chapter>
