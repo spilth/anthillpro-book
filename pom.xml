@@ -17,7 +17,7 @@
               <goal>generate-pdf</goal>
               <goal>generate-html</goal>
             </goals>
-            <phase>generate-sources</phase>
+            <phase>prepare-package</phase>
           </execution>
         </executions>
 		<configuration>
@@ -40,6 +40,7 @@
 				<goals>
 					<goal>dot</goal>
 				</goals>
+				<phase>generate-resources</phase>
 			</execution>
 		</executions>
 		<configuration>
