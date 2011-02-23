@@ -6,6 +6,30 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <name>Building and Deploying Applications with Anthill Pro</name>
+  <description>A book about UrbanCode's Anthill Pro</description>
+  <url>http://buildndeploy.wordpress.com</url>
+
+  <properties>
+      <book.title>Building and Deploying Applications with Anthill Pro</book.title>
+      <book.subtitle>Achieving Continuous Itegration, Feedback, Delivery and Deployment</book.subtitle>
+      <book.principle.author>Brian Kelly</book.principle.author>
+      <copyright.year>2011</copyright.year>
+  </properties>
+
+  <developers>
+      <developer>
+          <id>brian</id>
+          <name>Brian Kelly</name>
+          <email>polymonic@gmail.com</email>
+          <organization>spilth.org</organization>
+          <organizationUrl>http://www.spilth.org</organizationUrl>
+          <roles>
+              <role>Author</role>
+          </roles>
+      </developer>
+  </developers>
+
   <build>
     <plugins>
       <plugin>
