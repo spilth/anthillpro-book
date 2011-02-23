@@ -73,15 +73,15 @@
 			<title>Which Criteria Class?</title>
 			<para>A quick look at the AntHill Pro Remoting API might lead you to believe you're
 				working with the Criteria class listed there, but that class lives in
-				com.urbancode.anthill3.domain.script.agentfilter.criteria.</para>
+				<code>com.urbancode.anthill3.domain.script.agentfilter.criteria</code>.</para>
 			<para>For Job Pre-Conditions you want the Criteria class in the package in
-				com.urbancode.logic. This class is not listed in the Remoting or Scripting APIs.
+				<code>com.urbancode.logic</code>. This class is not listed in the Remoting or Scripting APIs.
 				However two of its subclasses are:<itemizedlist>
 					<listitem>
-						<para>com.urbancode.anthill3.domain.script.job.JobStatus</para>
+						<para><code>com.urbancode.anthill3.domain.script.job.JobStatus</code></para>
 					</listitem>
 					<listitem>
-						<para>com.urbancode.anthill3.domain.script.job.Property</para>
+						<para><code>com.urbancode.anthill3.domain.script.job.Property</code></para>
 					</listitem>
 				</itemizedlist></para>
 		</section>
@@ -284,14 +284,14 @@
 					</tgroup>
 				</table>
 				<para>Methods that accept a single status can be called as such:</para>
-				<programlisting><![CDATA[JobStatus.allAncestorsAre(JobStatusEnum.SUCCESS)]]></programlisting>
+				<screen>JobStatus.allAncestorsAre(JobStatusEnum.SUCCESS)</screen>
 				<para>And methods that accept multiple statuses can be called like this:</para>
-				<programlisting><![CDATA[return JobStatus.allAncestorsIn(new JobStatusEnum[] {
-	  JobStatusEnum.SUCCESS,
-	  JobStatusEnum.NOT_NEEDED
-	})]]></programlisting>
-				<para>Note that parentsAre and parentsIn don't follow the method naming convention
-					exactly. They should probably be called allParentsAre and allParentsIn.</para>
+				<screen>return JobStatus.allAncestorsIn(new JobStatusEnum[] {
+  JobStatusEnum.SUCCESS,
+  JobStatusEnum.NOT_NEEDED
+})</screen>
+				<para>Note that <code>parentsAre</code> and <code>parentsIn</code> don't follow the method naming convention
+					exactly. They should probably be called <code>allParentsAre</code> and <code>allParentsIn</code>.</para>
 			</section>
 			<section>
 				<title>Job Ancestry</title>
@@ -303,6 +303,56 @@
 							wordsize=""/>
 					</imageobject>
 				</mediaobject>
+				
+				<table>
+					<title>Job Ancestry Chart</title>
+					<tgroup cols="4">
+						<colspec colnum="1" colname="c1" colwidth="1.0*"/>
+						<colspec colnum="2" colname="c2" colwidth="1.0*"/>
+						<colspec colnum="3" colname="c3" colwidth="1.0*"/>
+						<colspec colnum="4" colname="c4" colwidth="1.0*"/>
+						<thead>
+							<row>
+								<entry>Relation</entry>
+								<entry>Job A</entry>
+								<entry>Job C1</entry>
+								<entry>Job D</entry>
+							</row>
+						</thead>
+						<tbody>
+							<row>
+								<entry>Ancestors</entry>
+								<entry>None</entry>
+								<entry>A, B1</entry>
+								<entry>A, B1, B2, C1, C2</entry>
+							</row>
+							<row>
+								<entry>Completed</entry>
+								<entry>None</entry>
+								<entry>A, B1, B2</entry>
+								<entry>A, B1, B2, C1, C2</entry>
+							</row>
+							<row>
+								<entry>Iterated</entry>
+								<entry>None</entry>
+								<entry>C1's Iterations</entry>
+								<entry>None</entry>
+							</row>
+							<row>
+								<entry>Parents</entry>
+								<entry>None</entry>
+								<entry>B1</entry>
+								<entry>C1, C2</entry>
+							</row>
+							<row>
+								<entry>Siblings</entry>
+								<entry>None</entry>
+								<entry>C2</entry>
+								<entry>None</entry>
+							</row>
+						</tbody>
+					</tgroup>
+				</table>				
 			</section>
 		</section>
 		<section>
@@ -454,11 +504,11 @@
 			of what JobStatus and Property provide then you need to make your own Criteria class.
 			You can do this by creating one on the fly and returning it in your script. You need
 			only implement a method named matches(Object) which needs to return a boolean.</para>
-		<programlisting><![CDATA[return new Criteria() {
+		<screen>return new Criteria() {
   public boolean matches(Object obj) {
     return true; // or false...
   }
-}]]></programlisting>
+}</screen>
 		<para>Return "true" if you want the Job in question to run. The Job will run and return one
 			of the JobStatusEnum values other than NOT_NEEDED, depending on its success. Return
 			"false" if you want it to be skipped. It will be given the status
@@ -469,7 +519,7 @@
 		<para>Just as you might want to combine a JobStatus and Property Criteria class, you might
 			want to combine them with your own Custom Criteria, or multiple Custom Criterias. This
 			is another place you can make use of the Logic static methods.</para>
-		<programlisting><![CDATA[Logic.and(
+		<screen>Logic.and(
   new Criteria() {
     public boolean matches(Object obj) {
       return true; // Or false!
@@ -480,7 +530,7 @@
     JobStatusEnum.SUCCESS,
     JobStatusEnum.SUCCESS_WARN
   })
-)]]></programlisting>
+)</screen>
 	</section>
 	<section>
 		<title>Context Is King</title>
@@ -543,5 +593,114 @@
 		</table>
 		<para>The Scripting API lists a number of other methods for these Lookup classes so it’s
 			worth looking through the documentation for others.</para>
+	</section>
+	
+	<section>
+		<title>Examples</title>
+		<section>
+			<title>Property Examples</title>
+			<section>
+				<title>Run if a Property exists</title>
+				<screen>Property.exists("deploy-admin”);</screen>
+			</section>
+
+			<section>
+				<title>Run if a Property has a certain value</title>
+				<screen>Property.is("deploy-admin", "true");</screen>
+			</section>
+
+			<section>
+				<title>Run if a Property does not have a set of values</title>
+				<screen>Property.notIn(“deploy-admin”, new String[] {“false”, “no”, “0”};</screen>
+			</section>
+
+			<section>
+				<title>Run if previous Jobs were successful/not needed and Property exists</title>
+				<screen>Logic.and(
+  JobStatus.allAncestorsIn(new JobStatusEnum[] {
+    JobStatusEnum.SUCCESS, JobStatusEnum.NOT_NEEDED }
+  ),
+  Property.exists("deploy-admin")
+);</screen>
+			</section>
+
+			<section>
+				<title>Run if previous Jobs were success/not needed and check properties</title>
+				<screen>Logic.and(
+  new Criteria[] {
+    JobStatus.allAncestorsIn(
+      new JobStatusEnum[] {JobStatusEnum.SUCCESS, JobStatusEnum.NOT_NEEDED}
+    ),
+    Property.not("copy-targets", ""),
+    Property.is("tips.distributed", "true")
+  }
+);</screen>
+			</section>
+		</section>
+
+		<section>
+			<title>Build Life Examples</title>
+			<section>
+				<title>Run if Build Life has a certain Status</title>
+				<screen>return new Criteria() {
+  public boolean matches(Object obj) throws Exception {
+    return BuildLifeLookup.getCurrent().hasStatus(
+      StatusLookup.getStatusByName(“approved")
+    );
+  }
+}</screen>
+			</section>
+		</section>
+		
+		<section>
+			<title>Build Request Examples</title>
+			<section>
+				<title>Run if Build Request Source is of a certain type</title>
+				<screen>return new Criteria() {
+  public boolean matches(Object obj) throws Exception {
+    return BuildRequestLookup.getCurrent().getRequestSource() == RequestSourceEnum.MANUAL;
+  }
+}</screen>
+			</section>
+		</section>
+		
+		<section>
+			<title>Environment Examples</title>
+			<section>
+				<title>Run if executing in a certain Environment</title>
+				<screen>return new Criteria() {
+  public boolean matches(Object obj) throws Exception {
+    return EnvironmentLookup.getCurrent().getShortName().equals(“dev”);
+  }
+}</screen>
+			</section>
+		</section>		
+	</section>
+
+	<section>
+		<title>Best Practices</title>
+		
+		<section>
+			<title>Leverage Properties for Flexible Code</title>
+			<para>While it would be tempting to use job preconditions in a library workflow to make exceptions for specific projects (by using ProjectLookup.getProject.getName()) the best practice would be to set a property on those projects and check that property instead. That way, when copying the project to create something similar the precondition will not need updating.</para>
+		</section>
+		
+		<section>
+			<title>Don’t Throw Exceptions</title>
+			<para>Job Pre-Conditions help decide whether a Job should run or not. They are not responsible for determining the overall success of the Job - that responsibility falls to Job Steps and the configuration of individual Jobs.</para>
+		</section>
+	</section>
+	
+	<section>
+		<title>Additional Resoureces</title>
+		<itemizedlist>
+			<listitem><para>Remoting API - /tools/remoting/anthill3-remoting/api/</para></listitem>
+			<listitem><para>Scripting API - /tools/scripting/anthill3-scripting/</para></listitem>
+			<listitem><para>UrbanCode Issue Tracker - https://bugs.urbancode.com/secure/IssueNavigator.jspa?
+				reset=true&amp;pid=10110&amp;status=5 - (Filter by Job Pre-condition components)</para></listitem>
+			<listitem><para>http://www.anthillpro.com/blogs/anthillpro-blog/2010/06/16/1276710498937.html</para></listitem>
+			<listitem><para>http://lists.urbancode.com/pipermail/anthill-pro/2009-November/009993.html</para></listitem>
+		</itemizedlist>
+		
 	</section>
 </chapter>
