@@ -1,0 +1,72 @@
+<chapter>
+	<title>Core Concepts</title>
+	<section>
+		<title>Overview</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../../target/graphviz/main-resources.png"/>
+			</imageobject>
+		</mediaobject>
+	</section>
+
+	<section>
+		<title>Life-Cycle Model</title>
+		<para>TK</para>
+
+		<section>
+			<title>Statuses</title>
+			<para>TK</para>
+		</section>
+
+		<section>
+			<title>Stamp Styles</title>
+			<para>TK</para>
+		</section>
+
+		<section>
+			<title>Artifact Sets</title>
+			<para>TK</para>
+		</section>
+
+		<section>
+			<title>Cleanup</title>
+			<para>TK</para>
+		</section>
+	</section>
+
+	<section>
+		<title>Environment Group &amp; Environment</title>
+		<para>TK</para>
+	</section>
+
+	<section>
+		<title>Agents &amp; Agent Filters</title>
+		<para>TK</para>
+	</section>
+
+	<section>
+		<title>Repositories</title>
+		<para>TK</para>
+	</section>
+
+	<section>
+		<title>Originating Workflows</title>
+		<para>TK</para>
+	</section>
+
+	<section>
+		<title>Secondary Workflows</title>
+		<para>TK</para>
+	</section>
+
+	<section>
+		<title>Sharing Workflow Definitions &amp; Jobs</title>
+		<para>TK</para>
+	</section>
+
+	<section>
+		<title>Security</title>
+		<para>TK</para>
+	</section>
+	
+</chapter>

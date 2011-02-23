@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY coreconcepts     SYSTEM "chapters/coreconcepts.xml">
 <!ENTITY jobpreconditions SYSTEM "chapters/jobpreconditions.xml">
 <!ENTITY agentfilters     SYSTEM "chapters/agentfilters.xml">
 <!ENTITY notifications    SYSTEM "chapters/notifications.xml">
@@ -23,6 +24,7 @@
 		<title>Preface</title>
 		<para>This is the preface.</para>
 	</preface>
+	&coreconcepts;
 	&jobpreconditions;
 	&agentfilters;
 	&notifications;
