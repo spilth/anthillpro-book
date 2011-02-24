@@ -56,28 +56,6 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-	    <groupId>us.bryon</groupId>
-	    <artifactId>graphviz-maven-plugin</artifactId>
-		<executions>
-			<execution>
-				<goals>
-					<goal>dot</goal>
-				</goals>
-				<phase>generate-resources</phase>
-			</execution>
-		</executions>
-		<configuration>
-			<basedir>src/dot</basedir>
-		</configuration>
-	  </plugin>
     </plugins>
   </build>
-
-  <distributionManagement>
-    <site>
-      <id>website</id>
-      <url>scp://webhost.company.com/www/website</url>
-    </site>
-  </distributionManagement>
 </project>
