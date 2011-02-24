@@ -313,8 +313,7 @@
 					chart below should help you understand:</para>
 				<mediaobject>
 					<imageobject>
-						<imagedata align="center" fileref="../../target/graphviz/job-ancestry.png"
-							wordsize=""/>
+						<imagedata align="center" fileref="figures/job-ancestry.png" />
 					</imageobject>
 				</mediaobject>
 				<table>

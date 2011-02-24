@@ -7,7 +7,7 @@
 		<title>Overview</title>
 		<mediaobject>
 			<imageobject>
-				<imagedata align="center" fileref="../../target/graphviz/main-resources.png"/>
+				<imagedata align="center" fileref="figures/main-resources.png"/>
 			</imageobject>
 		</mediaobject>
 	</section>
