@@ -2,7 +2,7 @@
 	<title>Agent Filters</title>
 	<section>
 		<title>Overview</title>
-		<para>Agent Filters are a mechanism in AntHill Pro that let you control the Agents that Jobs in a Workflow run on. This is important when an Environment contains several Agents but you want to target a subset of them based on some logic. Some examples of  situations where Agent Filters can help are:</para>
+		<para>Agent Filters are a mechanism in AntHill Pro that let you control which Agents a Job runs on within a Workflow. This is important when an Environment contains several Agents but you want to target a subset of them based on some logic. Some examples of  situations where Agent Filters can help are:</para>
 		<itemizedlist>
 			<listitem><para>Your project generates artifacts which need to be deployed to specific machines in your Environments - an application that goes to your app severs, static content that belongs on static servers and database statements that need to be executed on your database machines.</para></listitem>
 			<listitem><para>You need two Jobs to run on the same exact Agent</para></listitem>
