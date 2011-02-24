@@ -3,5 +3,25 @@
 	<section>
 		<title>Overview</title>
 		<para>Reports are neat.</para>
+		
+		<section>
+			<title>Template Reports</title>
+			<para>TK</para>
+			
+			<section>
+				<title>Report Templates</title>
+			</section>
+		</section>
+
+		<section>
+			<title>Velocity Reports</title>
+			<para>TK</para>
+
+			<section>
+				<title>TemplateHelper Class</title>
+				<para>TK</para>
+			</section>
+		</section>
+		
 	</section>
 </chapter>
