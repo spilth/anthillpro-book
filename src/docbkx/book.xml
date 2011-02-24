@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY coreconcepts     SYSTEM "chapters/coreconcepts.xml">
-<!ENTITY jobpreconditions SYSTEM "chapters/jobpreconditions.xml">
-<!ENTITY agentfilters     SYSTEM "chapters/agentfilters.xml">
-<!ENTITY notifications    SYSTEM "chapters/notifications.xml">
-<!ENTITY reports          SYSTEM "chapters/reports.xml">
-<!ENTITY beanshell        SYSTEM "appendices/beanshell.xml">
-<!ENTITY velocity         SYSTEM "appendices/velocity.xml">
-]>
-<book>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book xmlns:xi="http://www.w3.org/2001/XInclude">
 	<bookinfo>
 		<title>Building &amp; Deploying Applications with Anthill Pro</title>
 		<author>
@@ -20,16 +12,20 @@
 			<holder>Brian Kelly</holder>
 		</copyright>
 	</bookinfo>
+
 	<preface>
 		<title>Preface</title>
 		<para>This is the preface.</para>
 	</preface>
-	&coreconcepts;
-	&jobpreconditions;
-	&agentfilters;
-	&notifications;
-	&reports;
 
-	&beanshell;
-	&velocity;
+	<xi:include href="chapters/coreconcepts.xml" />
+	<xi:include href="chapters/jobpreconditions.xml" />
+	<xi:include href="chapters/agentfilters.xml" />
+	<xi:include href="chapters/notifications.xml" />
+	<xi:include href="chapters/reports.xml" />
+
+	<xi:include href="appendices/beanshell.xml" />
+	<xi:include href="appendices/velocity.xml" />
+	
+	<index></index>
 </book>
