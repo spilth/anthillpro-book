@@ -18,14 +18,14 @@
 		<para>This is the preface.</para>
 	</preface>
 
-	<xi:include href="chapters/coreconcepts.xml" />
-	<xi:include href="chapters/jobpreconditions.xml" />
-	<xi:include href="chapters/agentfilters.xml" />
-	<xi:include href="chapters/notifications.xml" />
-	<xi:include href="chapters/reports.xml" />
+	<xi:include href="chapter-coreconcepts.xml" />
+	<xi:include href="chapter-jobpreconditions.xml" />
+	<xi:include href="chapter-agentfilters.xml" />
+	<xi:include href="chapter-notifications.xml" />
+	<xi:include href="chapter-reports.xml" />
 
-	<xi:include href="appendices/beanshell.xml" />
-	<xi:include href="appendices/velocity.xml" />
+	<xi:include href="appendix-beanshell.xml" />
+	<xi:include href="appendix-velocity.xml" />
 	
 	<index></index>
 </book>
