@@ -2,66 +2,76 @@
 	<title>Job Pre-Conditions</title>
 	<section>
 		<title>Overview</title>
-		<para>Job Pre-Conditions Scripts let you control which Jobs within a Workflow run and which
-			are skipped. There are a number of situations where this kind of control comes in
-			handy:</para>
+		<para>Job Pre-Conditions Scripts allow you to control which Jobs are run within a Workflow
+			and which are skipped. Here are a few examples of situations where this kind of control
+			could be handy:</para>
 		<itemizedlist>
 			<listitem>
-				<para>You have a large number of projects that use the same Build Workflow but some
-					of these projects have documentation that needs to deployed while others don’t.
-					Rather than maintain two separate Build Workflows with only one difference you
-					can use a Job Pre-Condition Script that only runs a Documentation Deploy Job for
-					projects that supply a documentation artifact.</para>
+				<para>You have a large number of Projects that use the same Deploy Workflow but some
+					Projects have a documentation Artifact that needs to be deployed while others
+					don’t. Rather than maintain two separate Workflows with only one additional Job
+					(deploying the documentation), you could use a Job Pre-Condition Script to only
+					run a "Documentation Deploy" Job for Projects that actually supply a
+					documentation artifact.</para>
 			</listitem>
 			<listitem>
-				<para>You need to automatically clear out the database only when deploying to the QA
-					environment, but not to any other environment.</para>
+				<para>You have a Job that should only be automatically run in specific environments
+					(such as database migrations or cache restartrs) in Development and QA, but not
+					in Production. You can use a Job Pre-Condition to check the target Environment
+					to see if these Jobs should be run or not.</para>
 			</listitem>
 			<listitem>
-				<para>Deployers want to be able to choose, at Deploy time, which artifacts get
-					deployed.</para>
+				<para>Deployers want to be able to choose, at Deploy time, which Artifacts get
+					deployed to avoid the time spent to deploy components that haven't changed.
+					Workflow Properties can be set up to give Deployers that option and a Job
+					Pre-Condition script can insepct the value, existence or non-existence of those
+					properties and act accordingly.</para>
 			</listitem>
 		</itemizedlist>
-		<para>This document aims to give you an overview of how Job Pre-Conditions work and how to
-			write your own.</para>
+		<para>This document aims to give you details of how Job Pre-Conditions work and how to write
+			your own.</para>
 	</section>
 	<section>
 		<title>Creating Job Pre-Condition Scripts</title>
 		<para>To create Job Pre-Conditions you'll need access to the System tab. See the official
-			AHP documentation for information on managing permissions.</para>
+			Anthill Pro documentation for information on managing permissions.</para>
 		<para>To create a new Job Pre-Condition:</para>
 		<orderedlist>
 			<listitem>
-				<para>Log into AHP</para>
+				<para>Log into Anthill Pro.</para>
 			</listitem>
 			<listitem>
-				<para>Click on the "System" tab</para>
+				<para>Click on the "System" tab.</para>
 			</listitem>
 			<listitem>
-				<para>In the "Script Library" section click “Job Pre-Condition”</para>
+				<para>In the "Script Library" section click on “Job Pre-Condition”.</para>
 			</listitem>
 			<listitem>
-				<para>Click "Create New"</para>
+				<para>Click "Create New".</para>
 			</listitem>
 			<listitem>
-				<para>Enter a "Name"</para>
+				<para>Enter a "Name".</para>
 			</listitem>
 			<listitem>
-				<para>Enter a "Description"</para>
+				<para>Enter a "Description".</para>
 			</listitem>
 			<listitem>
-				<para>Choose a "Script Group"</para>
+				<para>Choose a "Script Group".</para>
 			</listitem>
 			<listitem>
-				<para>Choose a "Language" (Beanshell for the provided examples)</para>
+				<para>Choose a "Language". (Beanshell for the provided examples)</para>
 			</listitem>
 			<listitem>
-				<para>Enter the "Script"</para>
+				<para>Enter your "Script".</para>
 			</listitem>
 			<listitem>
 				<para>Click Save</para>
 			</listitem>
 		</orderedlist>
+	</section>
+	<section>
+		<title>Using Job Pre-Condition Scripts</title>
+		<para/>
 	</section>
 	<section>
 		<title>Job Pre-Condition Criteria Objects</title>
@@ -73,10 +83,10 @@
 			<title>Which Criteria Class?</title>
 			<para>A quick look at the AntHill Pro Remoting API might lead you to believe you're
 				working with the Criteria class listed there, but that class lives in
-				<code>com.urbancode.anthill3.domain.script.agentfilter.criteria</code>.</para>
+					<code>com.urbancode.anthill3.domain.script.agentfilter.criteria</code>.</para>
 			<para>For Job Pre-Conditions you want the Criteria class in the package in
-				<code>com.urbancode.logic</code>. This class is not listed in the Remoting or Scripting APIs.
-				However two of its subclasses are:<itemizedlist>
+					<code>com.urbancode.logic</code>. This class is not listed in the Remoting or
+				Scripting APIs. However two of its subclasses are:<itemizedlist>
 					<listitem>
 						<para><code>com.urbancode.anthill3.domain.script.job.JobStatus</code></para>
 					</listitem>
@@ -290,8 +300,9 @@
   JobStatusEnum.SUCCESS,
   JobStatusEnum.NOT_NEEDED
 })</screen>
-				<para>Note that <code>parentsAre</code> and <code>parentsIn</code> don't follow the method naming convention
-					exactly. They should probably be called <code>allParentsAre</code> and <code>allParentsIn</code>.</para>
+				<para>Note that <code>parentsAre</code> and <code>parentsIn</code> don't follow the
+					method naming convention exactly. They should probably be called
+						<code>allParentsAre</code> and <code>allParentsIn</code>.</para>
 			</section>
 			<section>
 				<title>Job Ancestry</title>
@@ -303,7 +314,6 @@
 							wordsize=""/>
 					</imageobject>
 				</mediaobject>
-				
 				<table>
 					<title>Job Ancestry Chart</title>
 					<tgroup cols="4">
@@ -352,7 +362,7 @@
 							</row>
 						</tbody>
 					</tgroup>
-				</table>				
+				</table>
 			</section>
 		</section>
 		<section>
@@ -594,7 +604,6 @@
 		<para>The Scripting API lists a number of other methods for these Lookup classes so it’s
 			worth looking through the documentation for others.</para>
 	</section>
-	
 	<section>
 		<title>Examples</title>
 		<section>
@@ -603,17 +612,14 @@
 				<title>Run if a Property exists</title>
 				<screen>Property.exists("deploy-admin”);</screen>
 			</section>
-
 			<section>
 				<title>Run if a Property has a certain value</title>
 				<screen>Property.is("deploy-admin", "true");</screen>
 			</section>
-
 			<section>
 				<title>Run if a Property does not have a set of values</title>
 				<screen>Property.notIn(“deploy-admin”, new String[] {“false”, “no”, “0”};</screen>
 			</section>
-
 			<section>
 				<title>Run if previous Jobs were successful/not needed and Property exists</title>
 				<screen>Logic.and(
@@ -623,7 +629,6 @@
   Property.exists("deploy-admin")
 );</screen>
 			</section>
-
 			<section>
 				<title>Run if previous Jobs were success/not needed and check properties</title>
 				<screen>Logic.and(
@@ -637,7 +642,6 @@
 );</screen>
 			</section>
 		</section>
-
 		<section>
 			<title>Build Life Examples</title>
 			<section>
@@ -651,7 +655,6 @@
 }</screen>
 			</section>
 		</section>
-		
 		<section>
 			<title>Build Request Examples</title>
 			<section>
@@ -663,7 +666,6 @@
 }</screen>
 			</section>
 		</section>
-		
 		<section>
 			<title>Environment Examples</title>
 			<section>
@@ -674,33 +676,48 @@
   }
 }</screen>
 			</section>
-		</section>		
+		</section>
 	</section>
-
 	<section>
 		<title>Best Practices</title>
-		
 		<section>
 			<title>Leverage Properties for Flexible Code</title>
-			<para>While it would be tempting to use job preconditions in a library workflow to make exceptions for specific projects (by using ProjectLookup.getProject.getName()) the best practice would be to set a property on those projects and check that property instead. That way, when copying the project to create something similar the precondition will not need updating.</para>
+			<para>While it would be tempting to use job preconditions in a Library Workflow to make
+				exceptions for specific projects (by using something like <code>if
+					(ProjectLookup.getProject.getName().equals("foo")</code>) the best practice
+				would be to set a more generic property on those projects and check for that
+				property instead. That way, when copying the project to create something similar the
+				precondition will not need to be updated to check for additional Project
+				names.</para>
 		</section>
-		
 		<section>
-			<title>Don’t Throw Exceptions</title>
-			<para>Job Pre-Conditions help decide whether a Job should run or not. They are not responsible for determining the overall success of the Job - that responsibility falls to Job Steps and the configuration of individual Jobs.</para>
+			<title>Don’t Throw Exceptions to Fail the Workflow</title>
+			<para>Job Pre-Conditions help decide whether a Job should run or not. They are not meant
+				to affect the overall success of the Job - that responsibility falls to Job
+				Steps.</para>
 		</section>
 	</section>
-	
 	<section>
 		<title>Additional Resoureces</title>
 		<itemizedlist>
-			<listitem><para>Remoting API - /tools/remoting/anthill3-remoting/api/</para></listitem>
-			<listitem><para>Scripting API - /tools/scripting/anthill3-scripting/</para></listitem>
-			<listitem><para>UrbanCode Issue Tracker - https://bugs.urbancode.com/secure/IssueNavigator.jspa?
-				reset=true&amp;pid=10110&amp;status=5 - (Filter by Job Pre-condition components)</para></listitem>
-			<listitem><para>http://www.anthillpro.com/blogs/anthillpro-blog/2010/06/16/1276710498937.html</para></listitem>
-			<listitem><para>http://lists.urbancode.com/pipermail/anthill-pro/2009-November/009993.html</para></listitem>
+			<listitem>
+				<para>Remoting API - /tools/remoting/anthill3-remoting/api/</para>
+			</listitem>
+			<listitem>
+				<para>Scripting API - /tools/scripting/anthill3-scripting/</para>
+			</listitem>
+			<listitem>
+				<para>UrbanCode Issue Tracker -
+					https://bugs.urbancode.com/secure/IssueNavigator.jspa?
+					reset=true&amp;pid=10110&amp;status=5 - (Filter by Job Pre-condition
+					components)</para>
+			</listitem>
+			<listitem>
+				<para>http://www.anthillpro.com/blogs/anthillpro-blog/2010/06/16/1276710498937.html</para>
+			</listitem>
+			<listitem>
+				<para>http://lists.urbancode.com/pipermail/anthill-pro/2009-November/009993.html</para>
+			</listitem>
 		</itemizedlist>
-		
 	</section>
 </chapter>
