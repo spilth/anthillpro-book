@@ -46,6 +46,7 @@
         </executions>
 		<configuration>
 			<tocMaxDepth>2</tocMaxDepth>
+	        <xincludeSupported>true</xincludeSupported>
 		</configuration>
         <dependencies>
           <dependency>
