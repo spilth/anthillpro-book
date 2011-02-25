@@ -47,6 +47,7 @@
 		<configuration>
 			<tocMaxDepth>2</tocMaxDepth>
 	        <xincludeSupported>true</xincludeSupported>
+			<includes>book.xml</includes>
 		</configuration>
         <dependencies>
           <dependency>
