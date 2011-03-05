@@ -11,65 +11,96 @@
 			</imageobject>
 		</mediaobject>
 	</section>
-
 	<section>
 		<title>Life-Cycle Model</title>
-		<para>TK</para>
-
+		<para>When it comes to Life-Cycle Model-based projects, naturally Life-Cycle Models are the
+			key component to consider. Whenever you create a LCM-based Project the first question
+			you have to answer Life-Cycle Model to use. While an existing LCM might seem usable for
+			a new project you should consider a few things.</para>
+		<para>There are number of concepts that might trigger creating additional Life-Cycle Models
+			or re-using existing ones.<itemizedlist>
+				<listitem>
+					<para>Differing Technologies/Programming Languages</para>
+				</listitem>
+				<listitem>
+					<para>Libraries vs. Deployed Applications</para>
+				</listitem>
+				<listitem>
+					<para/>
+				</listitem>
+			</itemizedlist></para>
 		<section>
 			<title>Statuses</title>
-			<para>TK</para>
+			<itemizedlist>
+				<listitem>
+					<para>Do you forsee the project requiring custom Statuses? Will those Statuses
+						apply to other projects as well? If not, they will end up filling the
+						Dashboard of your other projects with Statuses that don't apply to them and
+						may be confusing to your users.</para>
+				</listitem>
+				<listitem>
+					<para>Is your LCM associated with a particular technology or language? Keep in
+						mind that your Library Workflows and Library Jobs need to be associated with
+						an LCM. To avoid duplicating these items you may want projects based around
+						particular technologies to share an LCM so they can also share Library
+						items. You can use things like Job Pre-Condition Scripts and Step
+						Pre-Conditon Steps to deal with exceptional/optional Jobs and Steps that
+						don't apply to all projects using the LCM.</para>
+				</listitem>
+			</itemizedlist>
 		</section>
-
 		<section>
 			<title>Stamp Styles</title>
 			<para>TK</para>
 		</section>
-
 		<section>
 			<title>Artifact Sets</title>
-			<para>TK</para>
+			<para>If you can keep your Artifact Set names generic enough, these become easily
+				re-usable. You might be able to get by with names like "Application", "Database
+				Scripts", "Documentation" which could apply just as easily to a Java or Ruby on
+				Rails project.</para>
 		</section>
-
 		<section>
 			<title>Cleanup</title>
+			<itemizedlist>
+				<listitem>
+					<para>Different technologies, languages and build processes may result in
+						varying Artifact sizes which may require different cleanup strategies to
+						maintain sane and manageable disk-usage.</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		<section>
+			<title>Changing a Project's Life-Cycle Model</title>
 			<para>TK</para>
 		</section>
 	</section>
-
 	<section>
 		<title>Environment Group &amp; Environment</title>
 		<para>TK</para>
 	</section>
-
 	<section>
 		<title>Agents &amp; Agent Filters</title>
 		<para>TK</para>
 	</section>
-
 	<section>
 		<title>Repositories</title>
 		<para>TK</para>
 	</section>
-
 	<section>
 		<title>Originating Workflows</title>
 		<para>TK</para>
 	</section>
-
 	<section>
 		<title>Secondary Workflows</title>
 		<para>TK</para>
 	</section>
-
 	<section>
 		<title>Sharing Workflow Definitions &amp; Jobs</title>
 		<para>TK</para>
 	</section>
-
 	<section>
 		<title>Security</title>
 		<para>TK</para>
 	</section>
-	
 </chapter>
