@@ -48,6 +48,12 @@
 			<tocMaxDepth>2</tocMaxDepth>
 	        <xincludeSupported>true</xincludeSupported>
 			<includes>book.xml</includes>
+			<entities>
+				<entity>
+					<name>name</name>
+					<value>${name}</value>
+				</entity>
+			</entities>
 		</configuration>
         <dependencies>
           <dependency>
